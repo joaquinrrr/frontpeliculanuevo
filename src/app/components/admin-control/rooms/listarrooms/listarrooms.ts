@@ -1,11 +1,57 @@
-import { Component } from '@angular/core';
+import { Rooms } from '../../../../models/Rooms';
+import { TypePayments } from '../../../../models/TypePayments';
+import { MatButtonModule } from '@angular/material/button';
+import { AfterViewInit, ApplicationModule, Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { Router, RouterLink } from '@angular/router';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { App } from '../../../../app';
+import { RoomsService } from '../../../../services/rooms.service';
 
 @Component({
   selector: 'app-listarrooms',
-  imports: [],
+  imports: [
+    MatButtonModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatPaginatorModule,
+    MatInputModule,
+    MatIconModule
+  ],
   templateUrl: './listarrooms.html',
   styleUrl: './listarrooms.css'
 })
-export class Listarrooms {
+export class Listarrooms implements OnInit, AfterViewInit {
+dataSource: MatTableDataSource<Rooms> = new MatTableDataSource();
+  displayedColumns: string[] = [
+    
+    'id',
+    'nameroom',
+    'delete'
+  ]
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  ngAfterViewInit(): void {}
+
+  constructor(private sS: RoomsService, private router: Router, private aPP:App) {}
+
+  ngOnInit(): void {
+    this.sS.list().subscribe((data) => {
+      this.dataSource = new MatTableDataSource(data);
+    });
+    this.sS.getList().subscribe((data)=>{
+      this.dataSource=new MatTableDataSource(data)
+    })
+  }
+  isObject(value: any): boolean { return typeof value === 'object'; }
+
+
+  delete(id: number): void {
+    this.sS.eliminar(id).subscribe(() => {
+      this.dataSource.data = this.dataSource.data.filter(s => s.id !== id);
+    });
+  }
 }
