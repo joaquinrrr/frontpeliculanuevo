@@ -1,0 +1,57 @@
+.typeview {
+  min-height: 100vh;
+  background: linear-gradient(to right, #a8dfd0, #5bbbe0);
+  padding: 40px 20px;
+  font-family: 'Courier New', Courier, monospace;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.view-users-container {
+  width: 100%;
+  max-width: 800px;
+  background-color: #ffffffdd;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.view-users-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #233142;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+mat-header-cell, mat-cell {
+  padding: 12px 16px;
+  font-size: 0.95rem;
+  text-align: left;
+}
+
+mat-header-cell {
+  background-color: #b3b792;
+  color: white;
+  font-weight: bold;
+}
+
+mat-row:nth-child(even) mat-cell {
+  background-color: #f2f2f2;
+}
+
+mat-paginator {
+  margin-top: 20px;
+  color: #233142;
+}
+
+button[mat-raised-button] {
+  font-weight: bold;
+  color: white;
+}
