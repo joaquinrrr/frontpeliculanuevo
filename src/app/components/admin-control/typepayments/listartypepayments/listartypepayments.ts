@@ -31,7 +31,7 @@ export class Listartypepayments implements OnInit, AfterViewInit {
     'id',
     'paymentname',
     'urlimage',
-    'delete'
+    'acciones'
   ]
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -55,4 +55,16 @@ export class Listartypepayments implements OnInit, AfterViewInit {
       this.dataSource.data = this.dataSource.data.filter(s => s.id !== id);
     });
   }
+
+  editar(id: number): void {
+    this.router.navigate(['typepayment/ediciones', id]);  
+  }
+
+  isADMIN(): boolean {
+    return this.aPP.isAdmin();
+  }
+  isCLIENTE(): boolean {
+    return this.aPP.isCliente();
+  }
+
 }
