@@ -7,6 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { App } from '../../../../app';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-listarmovies',
@@ -15,17 +17,24 @@ import { MatIconModule } from '@angular/material/icon';
     MatFormFieldModule,
     MatPaginatorModule,
     MatInputModule,
-    MatIconModule],
+    MatIconModule,
+    RouterModule],
   templateUrl: './listarmovies.html',
   styleUrl: './listarmovies.css'
 })
-export class Listarmovies implements OnInit {
+export class Listarmovies implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource <Movies> = new MatTableDataSource();
-  displayedColumns: string[] = ['id', 'namemovie', 'yearmovie', 'typemovie', 'yearold', 'director', 'urlimage', 'delete'];
-
+displayedColumns: string[] = [
+  'id', 'namemovie', 'yearmovie', 'typemovie',
+  'yearold', 'director', 'urlimage', 'acciones' // ← esto debe estar incluido
+];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private mov: MoviesService) {}
+  constructor(
+    private mov: MoviesService,
+    private aPP: App,
+    private router: Router  // ← solución aquí
+  ) {}
 
   ngOnInit(): void {
     // Carga inicial de productos
@@ -50,5 +59,15 @@ export class Listarmovies implements OnInit {
     });
   }
 
+  editar(id: number): void {
+    this.router.navigate(['movies/ediciones', id]);  
+  }
+
+  isADMIN(): boolean {
+    return this.aPP.isAdmin();
+  }
+  isCLIENTE(): boolean {
+    return this.aPP.isCliente();
+  }
   
 }

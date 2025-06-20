@@ -45,4 +45,5 @@ export class App implements OnInit {
   isCliente() {
     return this.role === 'CLIENTE';
   }
+  
 }

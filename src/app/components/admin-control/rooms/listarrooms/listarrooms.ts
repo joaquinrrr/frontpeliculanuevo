@@ -24,13 +24,13 @@ import { RoomsService } from '../../../../services/rooms.service';
   templateUrl: './listarrooms.html',
   styleUrl: './listarrooms.css'
 })
-export class Listarrooms implements OnInit, AfterViewInit {
+export class Listarrooms implements OnInit {
 dataSource: MatTableDataSource<Rooms> = new MatTableDataSource();
   displayedColumns: string[] = [
     
     'id',
     'nameroom',
-    'delete'
+    'acciones'
   ]
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -53,5 +53,16 @@ dataSource: MatTableDataSource<Rooms> = new MatTableDataSource();
     this.sS.eliminar(id).subscribe(() => {
       this.dataSource.data = this.dataSource.data.filter(s => s.id !== id);
     });
+  }
+
+  editar(id: number): void {
+    this.router.navigate(['rooms/ediciones', id]);  
+  }
+
+  isADMIN(): boolean {
+    return this.aPP.isAdmin();
+  }
+  isCLIENTE(): boolean {
+    return this.aPP.isCliente();
   }
 }
