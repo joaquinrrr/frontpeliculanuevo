@@ -15,13 +15,18 @@
         <td mat-cell *matCellDef="let ciudad">{{ ciudad.namecity }}</td>
       </ng-container>
 
-      <!-- Delete Column -->
-      <ng-container matColumnDef="delete">
+      <!-- Acciones -->
+      <ng-container matColumnDef="acciones" >
         <th mat-header-cell *matHeaderCellDef>Acciones</th>
-        <td mat-cell *matCellDef="let ciudad">
-          <button mat-raised-button color="warn" (click)="delete(ciudad.id)">
-            Eliminar
-          </button>
+        <td mat-cell *matCellDef="let detail" >
+          <ng-container>
+            <button mat-icon-button color="primary" (click)="editar(detail.id)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="delete(detail.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </ng-container>
         </td>
       </ng-container>
   

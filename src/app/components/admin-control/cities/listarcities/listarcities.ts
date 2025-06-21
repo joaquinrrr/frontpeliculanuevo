@@ -30,7 +30,7 @@ dataSource: MatTableDataSource<Cities> = new MatTableDataSource();
     
     'id',
     'namecity',
-    'delete'
+    'acciones'
   ]
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -54,4 +54,17 @@ dataSource: MatTableDataSource<Cities> = new MatTableDataSource();
       this.dataSource.data = this.dataSource.data.filter(s => s.id !== id);
     });
   }
+
+  editar(id: number): void {
+    this.router.navigate(['cities/ediciones', id]);  
+  }
+
+  isADMIN(): boolean {
+    return this.aPP.isAdmin();
+  }
+  isCLIENTE(): boolean {
+    return this.aPP.isCliente();
+  }
+  
+
 }
