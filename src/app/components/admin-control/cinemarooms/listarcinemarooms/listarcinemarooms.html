@@ -1,1 +1,37 @@
-<p>listarcinemarooms works!</p>
+<div class="container">
+  <div class="title-container">
+    <h1>Lista de Cines y Salas</h1>
+  </div>
+
+  <div class="card-container">
+    <mat-card *ngFor="let element of dataSource.data">
+      <mat-card-header>
+        <mat-card-title>{{ element.cinema.localname }} - Sala {{ element.rooms.nameroom }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Código: {{ element.id }}</p>
+        <p>Cine: {{ element.cinema.localname }}</p>
+        <p>Ciudad: {{ element.cinema.cities.namecity }}</p>
+        <p>Sala: {{ element.rooms.nameroom }}</p>
+        <div class="button-container-right">
+          <button
+            mat-raised-button
+            color="primary"
+            [routerLink]="['ediciones', element.id]"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-raised-button
+            color="warn"
+            (click)="eliminar(element.id)"
+          >
+            <mat-icon>delete_sweep</mat-icon>
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <mat-paginator [pageSizeOptions]="[2, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements"></mat-paginator>
+</div>

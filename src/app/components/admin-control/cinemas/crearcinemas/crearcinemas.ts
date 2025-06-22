@@ -64,31 +64,31 @@ export class Crearcinemas implements OnInit {
   }
 
   aceptar(): void {
-    if (this.form.valid) {
-      this.g.id = this.form.value.id;
-      this.g.localname = this.form.value.localname;
-      this.g.urlimage = this.form.value.urlimage;
+  if (this.form.valid) {
+    this.g.id = this.form.value.id;
+    this.g.localname = this.form.value.localname;
+    this.g.urlimage = this.form.value.urlimage;
 
-      // asignación directa al id de Cities, sin instanciar un nuevo objeto
-      this.g.Cities.id = this.form.value.ciudad?.id;
+    this.g.cities.id = this.form.value.ciudad;
 
-      if (this.edicioncine) {
-        this.sG.update(this.g, this.g.id).subscribe(() => {
-          this.sG.list().subscribe((data) => {
-            this.sG.setList(data);
-          });
+    if (this.edicioncine) {
+      this.sG.update(this.g, this.g.id).subscribe(() => {
+        this.sG.list().subscribe((data) => {
+          this.sG.setList(data);
         });
-      } else {
-        this.sG.insert(this.g).subscribe(() => {
-          this.sG.list().subscribe((data) => {
-            this.sG.setList(data);
-          });
+      });
+    } else {
+      this.sG.insert(this.g).subscribe(() => {
+        this.sG.list().subscribe((data) => {
+          this.sG.setList(data);
         });
-      }
-
-      this.router.navigate(['cinema']);
+      });
     }
+
+    this.router.navigate(['cinema']);
   }
+}
+
 
   init(): void {
     if (this.edicioncine) {
@@ -97,7 +97,7 @@ export class Crearcinemas implements OnInit {
           id: data.id,
           localname: data.localname,
           urlimage: data.urlimage,
-          ciudad: data.Cities.id,
+          ciudad: data.cities.id,
         });
       });
     }

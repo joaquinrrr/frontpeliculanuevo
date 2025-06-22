@@ -5,6 +5,6 @@ export class MovieCinema {
     id: number = 0
     startinghour: Date = new Date(Date.now());
     endinghour: Date = new Date(Date.now());
-    CinemaRooms: CinemaRooms = new CinemaRooms()
-    Movies: Movies = new Movies()
+    cinemarooms_id: CinemaRooms = new CinemaRooms()
+    movies_id: Movies = new Movies()
 }

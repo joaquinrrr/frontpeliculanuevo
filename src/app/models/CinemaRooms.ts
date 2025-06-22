@@ -4,6 +4,6 @@ import { Rooms } from "./Rooms"
 
 export class CinemaRooms {
     id: number = 0
-    Cinema: Cinema = new Cinema()
-    Rooms: Rooms = new Rooms()
+    cinema: Cinema = new Cinema()
+    rooms: Rooms = new Rooms()
 }
