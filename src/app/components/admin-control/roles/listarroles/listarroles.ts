@@ -45,14 +45,6 @@ export class Listarroles implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  eliminar(id: number) {
-    this.sI.eliminar(id).subscribe((data) => {
-      this.sI.list().subscribe((data) => {
-        this.sI.setList(this.sortGenders(data));
-      });
-    });
-  }
-
   sortGenders(cinema: Roles[]): Roles[] {
       return cinema.sort((a, b) => a.id - b.id);
     }
