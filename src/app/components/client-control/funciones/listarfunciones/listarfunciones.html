@@ -1,1 +1,70 @@
-<p>listarfunciones works!</p>
+<section class="function-view">
+  <div class="view-functions-container">
+    <h2 class="view-functions-title">Lista de Funciones</h2>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <!-- ID -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let f">{{ f.id }}</td>
+      </ng-container>
+
+      <!-- Sillas -->
+      <ng-container matColumnDef="totalchair">
+        <th mat-header-cell *matHeaderCellDef>Sillas</th>
+        <td mat-cell *matCellDef="let f">{{ f.totalchair }}</td>
+      </ng-container>
+
+      <!-- Película -->
+      <ng-container matColumnDef="pelicula">
+        <th mat-header-cell *matHeaderCellDef>Película</th>
+        <td mat-cell *matCellDef="let f">
+          {{ f.moviecinema_id.movies_id?.namemovie }}
+        </td>
+      </ng-container>
+
+      <!-- Cine -->
+      <ng-container matColumnDef="cine">
+        <th mat-header-cell *matHeaderCellDef>cine</th>
+        <td mat-cell *matCellDef="let f">
+          {{ f.moviecinema_id.cinemarooms_id?.cinema.localname }}
+        </td>
+      </ng-container>
+
+      <!-- Sala -->
+      <ng-container matColumnDef="sala">
+        <th mat-header-cell *matHeaderCellDef>sala</th>
+        <td mat-cell *matCellDef="let f">
+          {{ f.moviecinema_id.cinemarooms_id?.rooms.nameroom }}
+        </td>
+      </ng-container>
+
+      <!-- Usuario -->
+      <ng-container matColumnDef="usuario">
+        <th mat-header-cell *matHeaderCellDef>Usuario</th>
+        <td mat-cell *matCellDef="let f">
+          {{ f.user_id?.username }}
+        </td>
+      </ng-container>
+
+      <!-- Acciones -->
+      <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let f">
+          <button mat-icon-button color="primary" (click)="editar(f.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="delete(f.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+</section>

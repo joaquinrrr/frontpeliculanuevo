@@ -34,7 +34,8 @@ export class UsersService {
     return this.httpClient.delete(`${this.url}/${id}`);
   }
 
-  userlogin(username: string): Observable<Users[]> {
-    return this.httpClient.get<Users[]>(`${this.url}/nombreusuario?nombreuser=${username}`);
+  userlogin(username: string): Observable<Users> {
+    return this.httpClient.get<Users>(`${this.url}/nombreusuario?nombreuser=${username}`);
   }
+
 }
