@@ -21,12 +21,12 @@ import { Roles } from './components/admin-control/roles/roles';
 import { Crearroles } from './components/admin-control/roles/crearroles/crearroles';
 import { Rooms } from './components/admin-control/rooms/rooms';
 import { Crearrooms } from './components/admin-control/rooms/crearrooms/crearrooms';
-import { Creartickets } from './components/client-control/tickets/creartickets/creartickets';
 import { Tickets } from './components/client-control/tickets/tickets';
 import { Typepayments } from './components/admin-control/typepayments/typepayments';
 import { Creartypepayments } from './components/admin-control/typepayments/creartypepayments/creartypepayments';
 import { Users } from './components/admin-control/users/users';
 import { Crearusers } from './components/admin-control/users/crearusers/crearusers';
+import { CrearTicketComponent } from './components/client-control/tickets/creartickets/creartickets';
 
 export const routes: Routes = [
     {
@@ -131,8 +131,8 @@ export const routes: Routes = [
         path: 'tickets',
         component: Tickets ,
         children: [
-            { path: 'registrartickets', component: Creartickets },
-            { path: 'ediciones/:id', component: Creartickets }
+            { path: 'registrartickets', component: CrearTicketComponent },
+            { path: 'ediciones/:id', component: CrearTicketComponent }
         ],
         
     },

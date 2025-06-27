@@ -3,7 +3,6 @@ import { environment } from './environments/environment';
 import { Subject } from 'rxjs';
 import { Ticket } from '../models/Ticket';
 import { HttpClient } from '@angular/common/http';
-import { saveAs } from 'file-saver';
 
 const base_url = environment.base
 @Injectable({
@@ -44,16 +43,4 @@ export class TicketService {
     return this.http.delete(`${this.url}/${id}`);
   }
 
-  // Method to call backend and download the PDF ticket
-  generateTicketPDF(id: number) {
-    return this.http.get(`${this.url}/${id}/boleta`, { responseType: 'blob' }).subscribe(
-      (response: any) => {
-        // Use FileSaver to download the PDF
-        saveAs(response, `boleta_${id}.pdf`);
-      },
-      (error) => {
-        console.error('Error generating PDF ticket:', error);
-      }
-    );
-  }
 }

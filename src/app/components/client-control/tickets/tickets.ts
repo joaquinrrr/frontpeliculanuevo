@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
-import { Listartickets } from './listartickets/listartickets';
+import { ListarTickets } from './listartickets/listartickets';
 
 @Component({
   selector: 'app-tickets',
-  imports: [RouterOutlet,Listartickets],
+  imports: [RouterOutlet,ListarTickets],
   templateUrl: './tickets.html',
   styleUrl: './tickets.css'
 })

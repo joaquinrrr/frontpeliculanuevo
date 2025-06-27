@@ -35,4 +35,8 @@ export class FunctionService {
   eliminar(id: number) {
     return this.http.delete(`${this.url}/${id}`);
   }
+
+  listByUser(userId: number) {
+    return this.http.get<Function[]>(`${this.url}/byUser?userId=${userId}`);
+  }
 }

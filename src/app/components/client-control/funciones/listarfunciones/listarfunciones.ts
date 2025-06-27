@@ -7,9 +7,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 
-import { App } from '../../../../app';
 import { FunctionService } from '../../../../services/functions.service';
+import { LoginService } from '../../../../services/login.service';
 import { Function } from '../../../../models/Functions';
+import { Users } from '../../../../models/Users';
+import { App } from '../../../../app';
 
 @Component({
   selector: 'app-listarfunciones',
@@ -23,7 +25,7 @@ import { Function } from '../../../../models/Functions';
     MatIconModule
   ],
   templateUrl: './listarfunciones.html',
-  styleUrl: './listarfunciones.css'
+  styleUrls: ['./listarfunciones.css']
 })
 export class Listarfunciones implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<Function> = new MatTableDataSource();
@@ -38,21 +40,26 @@ export class Listarfunciones implements OnInit, AfterViewInit {
   ];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  currentUser: Users = new Users();
+  username: string = '';  // Variable para almacenar el nombre de usuario
 
   constructor(
-    private sS: FunctionService,
+    private functionService: FunctionService,
+    private loginService: LoginService,
     private router: Router,
-    private aPP: App
+    private app: App
   ) {}
 
   ngOnInit(): void {
-    this.sS.list().subscribe((data) => {
-      this.dataSource = new MatTableDataSource(data);
-      this.dataSource.paginator = this.paginator;
-    });
+    // Obtener el nombre de usuario desde el servicio LoginService
+    this.username = this.loginService.showUsername();
 
-    this.sS.getList().subscribe((data) => {
-      this.dataSource = new MatTableDataSource(data);
+    // Llamamos al servicio para obtener todas las funciones
+    this.functionService.list().subscribe((data) => {
+      // Filtramos las funciones para mostrar solo las que pertenecen al usuario autenticado
+      const filteredFunctions = data.filter((func) => func.user_id.username === this.username);
+      // Asignamos las funciones filtradas al DataSource
+      this.dataSource = new MatTableDataSource(filteredFunctions);
       this.dataSource.paginator = this.paginator;
     });
   }
@@ -62,7 +69,7 @@ export class Listarfunciones implements OnInit, AfterViewInit {
   }
 
   delete(id: number): void {
-    this.sS.eliminar(id).subscribe(() => {
+    this.functionService.eliminar(id).subscribe(() => {
       this.dataSource.data = this.dataSource.data.filter(f => f.id !== id);
     });
   }
@@ -72,10 +79,10 @@ export class Listarfunciones implements OnInit, AfterViewInit {
   }
 
   isADMIN(): boolean {
-    return this.aPP.isAdmin();
+    return this.app.isAdmin();
   }
 
   isCLIENTE(): boolean {
-    return this.aPP.isCliente();
+    return this.app.isCliente();
   }
 }
