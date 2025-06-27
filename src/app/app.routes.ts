@@ -134,7 +134,7 @@ export const routes: Routes = [
             { path: 'registrartickets', component: Creartickets },
             { path: 'ediciones/:id', component: Creartickets }
         ],
-        canActivate: [segGuard]
+        
     },
     {
         path: 'typepayment',

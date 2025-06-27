@@ -1,1 +1,11 @@
-<p>listartickets works!</p>
+<div class="ticket-container">
+  <h2>Seleccione un Método de Pago</h2>
+  
+  <!-- Displaying available payment methods -->
+  <div class="payment-methods">
+    <div *ngFor="let payment of availablePayments" class="payment-card" (click)="onSelectPayment(payment)">
+      <img [src]="payment.urlimage" alt="{{ payment.paymentname }}" class="payment-image" />
+      <span class="payment-name">{{ payment.paymentname }}</span>
+    </div>
+  </div>
+</div>

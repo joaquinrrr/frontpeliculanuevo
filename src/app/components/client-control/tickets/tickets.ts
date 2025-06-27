@@ -1,11 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
+import { Listartickets } from './listartickets/listartickets';
 
 @Component({
   selector: 'app-tickets',
-  imports: [],
+  imports: [RouterOutlet,Listartickets],
   templateUrl: './tickets.html',
   styleUrl: './tickets.css'
 })
-export class Tickets {
-
+export class Tickets implements OnInit{
+  constructor(public route:ActivatedRoute){}
+  ngOnInit(): void {}
 }

@@ -1,1 +1,56 @@
-<p>creartickets works!</p>
+<div class="ticket-container">
+  <h2>Pago confirmado</h2>
+
+  <!-- Payment Method Section -->
+  <div class="payment-method-section">
+    <img *ngIf="paymentSelect" [src]="paymentSelect.urlimage" alt="Payment Image" class="payment-image" />
+    <div class="payment-info">
+      <p>Código de pago: 123456789</p>
+      <p>Referencia: 00000007</p>
+      <p>Monto: S/. 80.00</p>
+      <p>¡El/los boletos se ha/n enviado a su correo!</p>
+    </div>
+  </div>
+
+  <!-- Ticket Details Section -->
+  <div class="ticket-summary">
+    <h3>Cine seleccionado: {{ ticketDetails.movie }}</h3>
+    <p>Horario: {{ ticketDetails.time }}</p>
+    <p>Sala: {{ ticketDetails.room }}</p>
+    <p>Asientos: {{ ticketDetails.seats }}</p>
+    
+    <h4>Resumen:</h4>
+    <table class="ticket-table">
+      <thead>
+        <tr>
+          <th>Carrito</th>
+          <th>Cantidad</th>
+          <th>Precio</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of ticketDetails.cart">
+          <td>{{ item.item }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.price | currency:'S/.':true:'1.2-2' }}</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="2">Total:</td>
+          <td>{{ 'S/. ' + ticketDetails.cart.reduce((sum, item) => sum + item.price * item.quantity, 0) }}</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <!-- Buttons Section -->
+  <div class="button-container">
+    <button class="btn btn-primary" (click)="generateBoleta(ticket.id)">
+      Generar Boleta
+    </button>
+    <button class="btn btn-secondary" (click)="goBackToHome()">
+      Volver al Inicio
+    </button>
+  </div>
+</div>
