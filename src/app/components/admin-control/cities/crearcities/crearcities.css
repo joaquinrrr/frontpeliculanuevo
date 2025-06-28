@@ -1,0 +1,92 @@
+/* Contenedor Principal */
+.title-container {
+  background: linear-gradient(to right, #a8dfd0, #5bbbe0); /* Fondo degradado pastel */
+  padding: 40px 20px;
+  font-family: 'Courier New', Courier, monospace;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Título */
+.title-container h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #233142;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* Estilo de los formularios */
+mat-form-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+mat-form-field .mat-input-element {
+  font-size: 1.1rem;
+}
+
+/* Mensaje de error */
+mat-error {
+  font-size: 0.9rem;
+  color: #d32f2f;
+}
+
+/* Botones */
+button {
+  font-size: 1rem;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  margin: 15px 10px;
+  min-width: 120px;
+}
+
+button.mat-raised-button {
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Botón Aceptar */
+button[color="warn"]:nth-child(1) {
+  background-color: #FF7043;
+  color: white;
+}
+
+button[color="warn"]:nth-child(1):hover {
+  background-color: #e64a19;
+  transform: scale(1.05);
+}
+
+/* Botón Cancelar */
+button[color="warn"]:nth-child(2) {
+  background-color: #FF4081;
+  color: white;
+}
+
+button[color="warn"]:nth-child(2):hover {
+  background-color: #FF3366;
+  transform: scale(1.05);
+}
+
+/* Espaciado entre los formularios */
+br {
+  margin-bottom: 15px;
+}
+
+/* Estilo general de los inputs */
+input {
+  font-size: 1rem;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  width: 100%;
+}
+
+input:focus {
+  border-color: #FF4081;
+  outline: none;
+  box-shadow: 0 0 10px rgba(255, 64, 129, 0.5);
+}

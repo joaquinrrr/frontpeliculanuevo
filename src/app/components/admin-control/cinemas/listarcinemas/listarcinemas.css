@@ -1,0 +1,106 @@
+/* Estilo para el contenedor principal */
+.container {
+  padding: 40px 20px;
+  font-family: 'Courier New', Courier, monospace;
+  background: linear-gradient(to right, #a8dfd0, #5bbbe0); /* Fondo degradado pastel */
+  min-height: 100vh;
+  text-align: center;
+}
+
+/* Contenedor del título */
+.title-container {
+  background-color: #ffffffdd;
+  padding: 20px 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+  margin-bottom: 30px;
+}
+
+/* Título */
+.title-container h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #233142;
+  margin: 0;
+}
+
+/* Contenedor de las tarjetas */
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Estilo de cada tarjeta */
+mat-card {
+  background-color: #ffffff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+mat-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo para el título de cada tarjeta */
+mat-card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #233142;
+}
+
+/* Estilo para los párrafos dentro de la tarjeta */
+mat-card-content p {
+  font-size: 1rem;
+  color: #555;
+  margin: 5px 0;
+}
+
+/* Contenedor de los botones de la tarjeta */
+.button-container-right {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* Estilo de los botones */
+button {
+  font-weight: bold;
+}
+
+button.mat-raised-button {
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+/* Estilo para el botón de editar */
+button[color="primary"] {
+  background-color: #4CAF50; /* Verde para editar */
+  color: white;
+}
+
+button[color="primary"]:hover {
+  background-color: #45a049;
+}
+
+/* Estilo para el botón de eliminar */
+button[color="warn"] {
+  background-color: #FF7043; /* Rojo para eliminar */
+  color: white;
+}
+
+button[color="warn"]:hover {
+  background-color: #e64a19;
+}
+
+/* Estilo para el paginador */
+mat-paginator {
+  margin-top: 20px;
+  color: #233142;
+  text-align: center;
+}

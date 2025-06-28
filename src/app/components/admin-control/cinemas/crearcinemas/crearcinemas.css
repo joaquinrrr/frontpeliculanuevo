@@ -1,0 +1,111 @@
+/* Estilo para el contenedor principal */
+.container {
+  padding: 40px 20px;
+  font-family: 'Courier New', Courier, monospace;
+  background: linear-gradient(to right, #a8dfd0, #5bbbe0); /* Fondo degradado pastel */
+  min-height: 100vh;
+  text-align: center;
+}
+
+/* Contenedor del título */
+.title-container {
+  background-color: #ffffffdd;
+  padding: 20px 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+  margin-bottom: 30px;
+}
+
+/* Título */
+.title-container h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #233142;
+  margin: 0;
+  text-align: center;
+}
+
+/* Estilo para el formulario */
+.example-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para los campos del formulario */
+mat-form-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+mat-form-field .mat-form-field-infix {
+  font-size: 1rem;
+}
+
+/* Estilo para los botones del formulario */
+button {
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin: 10px;
+}
+
+button.mat-raised-button[color="primary"] {
+  background-color: #4CAF50; /* Verde para aceptar */
+  color: white;
+}
+
+button.mat-raised-button[color="primary"]:hover {
+  background-color: #45a049;
+}
+
+button.mat-raised-button[color="warn"] {
+  background-color: #FF7043; /* Rojo para cancelar */
+  color: white;
+}
+
+button.mat-raised-button[color="warn"]:hover {
+  background-color: #e64a19;
+}
+
+/* Estilo para los mensajes de error */
+mat-error {
+  font-size: 0.875rem;
+  color: #d32f2f;
+}
+
+/* Estilo para las opciones del select */
+mat-select {
+  font-size: 1rem;
+}
+
+/* Estilo para el campo del nombre del cine */
+mat-form-field input {
+  font-size: 1rem;
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%;
+  background-color: #f5f5f5;
+}
+
+/* Estilo para el campo de URL de la imagen */
+mat-form-field input {
+  font-size: 1rem;
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%;
+  background-color: #f5f5f5;
+}
+
+/* Estilo para el select de ciudad */
+mat-form-field mat-select {
+  font-size: 1rem;
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%;
+  background-color: #f5f5f5;
+}

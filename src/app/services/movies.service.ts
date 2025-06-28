@@ -11,11 +11,16 @@ const base_url = environment.base
 export class MoviesService {
   private url = `${base_url}/movies`
   private urlinsert = `${base_url}/movies/Registro`
+  private urlregistermovielogin=`${base_url}/movieregister/listar`
   private listaCambio = new Subject<Movies[]>();
   constructor(private http:HttpClient) { }
 
   list(){
       return this.http.get<Movies[]>(this.url)
+  }
+
+  listmovieregister(){
+      return this.http.get<Movies[]>(this.urlregistermovielogin)
   }
   insert(r: Movies): Observable<Movies> {
     return this.http.post<Movies>(this.urlinsert, r);

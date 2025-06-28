@@ -1,0 +1,99 @@
+/* Estilo general para el contenedor principal */
+.group {
+  min-height: 100vh;
+  background: linear-gradient(to right, #A7C7E7, #ffffff); /* Fondo degradado pastel */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centrado vertical */
+  align-items: center; /* Centrado horizontal */
+  padding: 40px 20px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* Estilo del contenedor del título */
+.title-container {
+  width: 100%;
+  max-width: 900px; /* Limitar el ancho */
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Título de la sección */
+.title-container h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #233142;
+}
+
+/* Estilo del formulario */
+form {
+  width: 100%;
+  max-width: 600px; /* Reducción de tamaño para un aspecto más limpio */
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrado horizontal de los campos */
+  justify-content: center; /* Centrado vertical de los campos */
+}
+
+/* Estilo para los campos de entrada */
+mat-form-field {
+  width: 100%;
+  margin-bottom: 15px; /* Espacio entre los campos */
+}
+
+/* Estilo para las etiquetas */
+mat-form-field mat-label {
+  font-size: 1.1rem;
+  color: #233142;
+}
+
+/* Estilo para el input de texto */
+input.mat-input-element {
+  font-size: 1rem;
+}
+
+/* Mensajes de error en los campos */
+mat-error {
+  color: #f44336;
+  font-size: 0.9rem;
+}
+
+/* Estilo para los botones */
+button.mat-raised-button {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 25px;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+/* Estilo para el botón de "Aceptar" */
+button.mat-raised-button[color="warn"] {
+  background-color: #FF4081;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+button.mat-raised-button[color="warn"]:hover {
+  background-color: #FF3366;
+}
+
+/* Estilo para el botón de "Cancelar" */
+button.mat-raised-button[color="warn"]:nth-child(2) {
+  margin-top: 20px;
+}
+
+/* Espaciado entre los campos */
+form .mat-form-field {
+  margin-bottom: 20px;
+}

@@ -25,12 +25,15 @@ import { Tickets } from './components/client-control/tickets/tickets';
 import { Typepayments } from './components/admin-control/typepayments/typepayments';
 import { Creartypepayments } from './components/admin-control/typepayments/creartypepayments/creartypepayments';
 import { Users } from './components/admin-control/users/users';
-import { Crearusers } from './components/admin-control/users/crearusers/crearusers';
 import { CrearTicketComponent } from './components/client-control/tickets/creartickets/creartickets';
+import { Register } from './components/home/register/register';
 
 export const routes: Routes = [
     {
         path: 'landinghome',component:Firsthome
+    },
+    {
+        path: 'register',component:Register
     },
     {
         path: '',
@@ -146,12 +149,7 @@ export const routes: Routes = [
         canActivate: [segGuard]
     },
     {
-        path: 'usersss',
-        component: Users,
-        children: [
-            { path: 'registrarusers', component: Crearusers },
-            { path: 'ediciones/:id', component: Crearusers }
-        ],
+        path: 'users',component: Users,
         canActivate: [segGuard]
     },
 ];

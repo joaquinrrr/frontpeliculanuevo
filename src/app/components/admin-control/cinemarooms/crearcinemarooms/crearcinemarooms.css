@@ -1,0 +1,100 @@
+/* Contenedor principal para el título */
+.title-container {
+  background-color: #ffffffdd;
+  padding: 20px 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* Título */
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #233142;
+  margin: 0;
+}
+
+/* Contenedor del formulario */
+.container {
+  padding: 20px;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para el formulario */
+.example-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Estilos para los campos de formulario */
+mat-form-field.example-full-width {
+  width: 100%;
+}
+
+/* Estilo para el botón Aceptar */
+button[type="submit"] {
+  background-color: #4CAF50; /* Botón verde para Aceptar */
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* Estilo para el botón Cancelar */
+button[color="warn"] {
+  background-color: #FF7043; /* Botón rojo para Cancelar */
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+button[color="warn"]:hover {
+  background-color: #e64a19;
+}
+
+/* Estilo de los campos de error */
+mat-error {
+  color: #d32f2f;
+  font-size: 0.9rem;
+}
+
+/* Estilo para las etiquetas de los campos */
+mat-label {
+  font-weight: bold;
+  color: #233142;
+}
+
+/* Estilo para los selectores de cine y sala */
+mat-select {
+  font-size: 1rem;
+  padding: 10px;
+}
+
+/* Contenedor de los botones */
+button {
+  margin: 10px 0;
+}
+
+/* Fondo general */
+body {
+  background: linear-gradient(to right, #a8dfd0, #5bbbe0);
+  font-family: 'Courier New', Courier, monospace;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

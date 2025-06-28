@@ -9,6 +9,19 @@
   font-family: 'Courier New', Courier, monospace;
   color: #233142;
 }
+.movie-image {
+  width: 100%;          /* Asegura que la imagen ocupe todo el ancho del contenedor */
+  max-width: 350px;     /* Limita el tamaño máximo de la imagen */
+  height: auto;         /* Mantiene la relación de aspecto */
+  border-radius: 10px;  /* Bordes redondeados para un estilo más suave */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);  /* Sombra suave para darle profundidad */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;  /* Transición suave en el hover */
+}
+
+.movie-image:hover {
+  transform: scale(1.05);  /* Escala ligeramente la imagen al pasar el mouse */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Aumenta la sombra en el hover */
+}
 
 .welcome-container h1 {
   font-size: 2rem;

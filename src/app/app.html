@@ -1,7 +1,6 @@
-<mat-toolbar color="primary" *ngIf="verificar()" class="custom-toolbar">
-  <button mat-button [routerLink]="['/homes']">
-    <mat-icon>home</mat-icon>Home
-  </button>
+<mat-toolbar  *ngIf="verificar()" class="custom-toolbar">
+    <div class="logo">CINEMAHUB+</div>
+   
   
   <button mat-button [matMenuTriggerFor]="menuSalir" class="custom-button">
     <mat-icon>person</mat-icon><span class="button-text">Perfil</span>
@@ -145,11 +144,8 @@
 </mat-menu>
 
 <mat-menu #menuUsers="matMenu">
-  <button mat-menu-item routerLink="/usersss">
+  <button mat-menu-item routerLink="/users">
     <mat-icon>list</mat-icon>Listar
-  </button>
-  <button mat-menu-item routerLink="/usersss/registrarusers">
-    <mat-icon>add</mat-icon>Insertar Usuarios
   </button>
 </mat-menu>
 

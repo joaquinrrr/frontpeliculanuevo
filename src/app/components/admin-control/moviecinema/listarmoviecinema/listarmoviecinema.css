@@ -1,0 +1,112 @@
+/* Estilo general para el contenedor principal */
+.container {
+  min-height: 100vh;
+  background: linear-gradient(to right, #A7C7E7, #5bbbe0); /* Fondo degradado pastel */
+  padding: 40px 20px;
+  font-family: 'Courier New', Courier, monospace;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Contenedor de la lista de funciones de películas */
+.title-container {
+  width: 100%;
+  max-width: 1200px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+/* Título de la lista */
+.title-container h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #233142;
+  text-align: center;
+}
+
+/* Contenedor de tarjetas */
+.card-container {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Estilo de las tarjetas */
+mat-card {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+/* Encabezado de la tarjeta */
+mat-card-header {
+  background-color: #f0f0f0;
+  padding: 10px 0;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+mat-card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #233142;
+  text-align: center;
+}
+
+/* Contenido de la tarjeta */
+mat-card-content p {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Contenedor de botones dentro de la tarjeta */
+.button-container-right {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* Estilo de los botones de acción */
+button.mat-raised-button {
+  padding: 10px 15px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+/* Color de los botones */
+button.mat-raised-button[color="primary"] {
+  background-color: #4CAF50;
+  color: white;
+}
+
+button.mat-raised-button[color="warn"] {
+  background-color: #f44336;
+  color: white;
+}
+
+/* Hover sobre los botones */
+button.mat-raised-button:hover {
+  background-color: #45a049; /* Para el botón de editar */
+}
+
+button.mat-raised-button[color="warn"]:hover {
+  background-color: #e53935; /* Para el botón de eliminar */
+}
+
+/* Estilo del paginador */
+mat-paginator {
+  margin-top: 20px;
+  color: #233142;
+}
