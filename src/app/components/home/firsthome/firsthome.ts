@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MoviesService } from '../../../services/movies.service';
 import { Movies } from '../../../models/Movies';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-firsthome',
-  imports: [CommonModule],
+  imports: [CommonModule,
+    RouterLink  ],
   templateUrl: './firsthome.html',
   styleUrl: './firsthome.css'
 })
