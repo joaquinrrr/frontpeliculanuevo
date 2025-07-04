@@ -3,6 +3,9 @@ import { environment } from './environments/environment';
 import { Observable, Subject } from 'rxjs';
 import { MovieCinema } from '../models/MovieCinema';
 import { HttpClient } from '@angular/common/http';
+import { FindMovieScheduleDTO } from '../models/FindMovieScheduleDTO';
+import { QuantityFunctionsCinemaDTO } from '../models/QuantityFunctionsCinemaDTO';
+import { QuantityMoviesCityDTO } from '../models/QuantityMoviesCityDTO';
 
 const base_url = environment.base
 @Injectable({
@@ -35,4 +38,17 @@ export class MovieCinemaService {
   eliminar(id: number) {
     return this.http.delete(`${this.url}/${id}`);
   }
+  getMovieScheduleByCinema(cinema: string) {
+  return this.http.get<FindMovieScheduleDTO[]>(`${this.url}/funcionesPorCine?cinema=${cinema}`);
+  }
+
+  getQuantityFunctionsByCinema(): Observable<QuantityFunctionsCinemaDTO[]> {
+    return this.http.get<QuantityFunctionsCinemaDTO[]>(`${this.url}/cantidadFuncionesCine`);
+  }
+
+  getQuantityMoviesByCity(): Observable<QuantityMoviesCityDTO[]> {
+  return this.http.get<QuantityMoviesCityDTO[]>(`${this.url}/cantidadPeliculasCiudad`);
+  }
+
+
 }

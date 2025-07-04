@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { environment } from './environments/environment';
 import { Observable, Subject } from 'rxjs';
 import { Review } from '../models/Review';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { GetMovieReviewDTO } from '../models/GetMovieReviewDTO';
 
 const base_url = environment.base
 @Injectable({
@@ -35,4 +36,9 @@ export class ReviewService {
   eliminar(id: number) {
     return this.http.delete(`${this.url}/${id}`);
   }
+  getStatsByMovieName(movie: string): Observable<GetMovieReviewDTO[]> {
+    const params = new HttpParams().set('movie', movie);
+    return this.http.get<GetMovieReviewDTO[]>(`${this.url}/estadisticasResenas`, { params });
+  }
+
 }

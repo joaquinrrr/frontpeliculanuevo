@@ -6,7 +6,6 @@ import { provideClientHydration, withEventReplay } from '@angular/platform-brows
 import { HTTP_INTERCEPTORS, provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { AuthInterceptor } from './auth.interceptor';
-import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { JwtModule } from '@auth0/angular-jwt';
 
 
@@ -28,7 +27,9 @@ export const appConfig: ApplicationConfig = {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }, provideCharts(withDefaultRegisterables()), provideCharts(withDefaultRegisterables())
+    },
+    provideAnimationsAsync(),
+    provideAnimationsAsync(), provideAnimationsAsync(), provideZoneChangeDetection(),
   ],
 };
 

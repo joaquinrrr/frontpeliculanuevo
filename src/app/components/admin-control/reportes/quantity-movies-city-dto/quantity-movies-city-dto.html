@@ -1,1 +1,11 @@
-<p>quantity-movies-city-dto works!</p>
+<div style="text-align: center;">
+  <h2>Películas por Ciudad</h2>
+
+  <div class="chart-container" style="max-width: 700px; margin: 20px auto;">
+    <canvas baseChart
+      [data]="barChartData"
+      [type]="barChartType"
+      [options]="{ responsive: true }">
+    </canvas>
+  </div>
+</div>

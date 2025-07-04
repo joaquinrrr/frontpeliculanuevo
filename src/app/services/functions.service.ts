@@ -3,6 +3,10 @@ import { environment } from './environments/environment';
 import { Observable, Subject } from 'rxjs';
 import { Function } from '../models/Functions';
 import { HttpClient } from '@angular/common/http';
+import { QuantityFunctionsCinemaDTO } from '../models/QuantityFunctionsCinemaDTO';
+import { QuantityFunctionsUserDateDTO } from '../models/QuantityFunctionsUserDateDTO';
+import { QuantityFunctionsUsersDTO } from '../models/QuantityFunctionsUsersDTO';
+import { QuantityTicketsCinemaDTO } from '../models/QuantityTicketsCinemaDTO';
 
 const base_url = environment.base
 @Injectable({
@@ -39,4 +43,17 @@ export class FunctionService {
   listByUser(userId: number) {
     return this.http.get<Function[]>(`${this.url}/byUser?userId=${userId}`);
   }
+
+  getFunctionsByUserAndDate(username: string): Observable<QuantityFunctionsUserDateDTO[]> {
+  return this.http.get<QuantityFunctionsUserDateDTO[]>(`${this.url}/funcionesPorUsuarioFecha?username=${username}`);
+  }
+
+  getQuantityFunctionsByUser(): Observable<QuantityFunctionsUsersDTO[]> {
+    return this.http.get<QuantityFunctionsUsersDTO[]>(`${this.url}/cantidadFuncionesUsuario`);
+  }
+
+  getQuantityTicketsByCinema(): Observable<QuantityTicketsCinemaDTO[]> {
+    return this.http.get<QuantityTicketsCinemaDTO[]>(`${this.url}/ticketsVendidosPorCine`);
+  }
+
 }
