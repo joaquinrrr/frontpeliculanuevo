@@ -27,6 +27,17 @@ import { Creartypepayments } from './components/admin-control/typepayments/crear
 import { Users } from './components/admin-control/users/users';
 import { CrearTicketComponent } from './components/client-control/tickets/creartickets/creartickets';
 import { Register } from './components/home/register/register';
+import { Reportes } from './components/admin-control/reportes/reportes';
+import { FindMovieScheduleDTO } from './components/admin-control/reportes/find-movie-schedule-dto/find-movie-schedule-dto';
+import { FindTicketsUsernameDTO } from './components/admin-control/reportes/find-tickets-username-dto/find-tickets-username-dto';
+import { GetMovieReviewDTO } from './components/admin-control/reportes/get-movie-review-dto/get-movie-review-dto';
+import { QuantityFunctionsCinemaDTO } from './components/admin-control/reportes/quantity-functions-cinema-dto/quantity-functions-cinema-dto';
+import { QuantityFunctionsUserDateDTO } from './components/admin-control/reportes/quantity-functions-user-date-dto/quantity-functions-user-date-dto';
+import { QuantityFunctionsUserDTO } from './components/admin-control/reportes/quantity-functions-user-dto/quantity-functions-user-dto';
+import { QuantityMoviesCityDTO } from './components/admin-control/reportes/quantity-movies-city-dto/quantity-movies-city-dto';
+import { QuantityTicketsCinemaDTO } from './components/admin-control/reportes/quantity-tickets-cinema-dto/quantity-tickets-cinema-dto';
+import { QuantityTotalRevenueByPaymentDTO } from './components/admin-control/reportes/quantity-total-revenue-by-payment-dto/quantity-total-revenue-by-payment-dto';
+import { TotalRevenuewByPaymentDateDTO } from './components/admin-control/reportes/total-revenuew-by-payment-date-dto/total-revenuew-by-payment-date-dto';
 
 export const routes: Routes = [
     {
@@ -147,6 +158,22 @@ export const routes: Routes = [
             { path: 'ediciones/:id', component: Creartypepayments }
         ],
         canActivate: [segGuard]
+    },
+    {
+        path: 'reportes',
+        component: Reportes,
+        children:[
+          { path: 'find-movie-schedule', component: FindMovieScheduleDTO },
+          { path: 'find-tickets-username', component: FindTicketsUsernameDTO },
+          { path: 'get-movie-review', component: GetMovieReviewDTO },
+          { path: 'quantity-functions-cinema', component: QuantityFunctionsCinemaDTO },
+          { path: 'quantity-functions-user-date', component: QuantityFunctionsUserDateDTO },
+          { path: 'quantity-functions-users', component: QuantityFunctionsUserDTO },
+          { path: 'quantity-movies-city', component: QuantityMoviesCityDTO },
+          { path: 'quantity-tickets-cinema', component: QuantityTicketsCinemaDTO },
+          { path: 'quantity-total-revenue-by-payment', component:QuantityTotalRevenueByPaymentDTO },
+          { path: 'quantity-total-revenue-by-payment-date', component: TotalRevenuewByPaymentDateDTO}
+        ]
     },
     {
         path: 'users',component: Users,

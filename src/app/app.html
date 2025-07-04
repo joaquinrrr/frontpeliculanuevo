@@ -41,7 +41,9 @@
   <button mat-menu-item [matMenuTriggerFor]="menuUsers" class="custom-button" *ngIf="isAdmin()">
     <mat-icon>assignment</mat-icon><span class="button-text">Usuarios</span>
   </button>
-
+  <button mat-button [matMenuTriggerFor]="menuReport">
+    <mat-icon>file_copy</mat-icon> Reportes
+  </button>
 </mat-toolbar>
 
 <mat-menu #menuCines="matMenu">
@@ -159,5 +161,19 @@
     <p>Nombre de usuario: {{ username }}</p>
   </button>
 </mat-menu>
+
+<mat-menu #menuReport="matMenu">
+  <button mat-menu-item routerLink="/reportes/find-movie-schedule">Buscar funciones por cine</button>
+  <button mat-menu-item routerLink="/reportes/find-tickets-username">Buscar tickets por usuario</button>
+  <button mat-menu-item routerLink="/reportes/get-movie-review">Reseñas de película</button>
+  <button mat-menu-item routerLink="/reportes/quantity-functions-cinema">Cantidad funciones por cine</button>
+  <button mat-menu-item routerLink="/reportes/quantity-functions-user-date">Funciones por usuario y fecha</button>
+  <button mat-menu-item routerLink="/reportes/quantity-functions-users">Cantidad funciones por usuario</button>
+  <button mat-menu-item routerLink="/reportes/quantity-movies-city">Películas proyectadas por ciudad</button>
+  <button mat-menu-item routerLink="/reportes/quantity-tickets-cinema">Tickets vendidos por cine</button>
+  <button mat-menu-item routerLink="/reportes/quantity-total-revenue-by-payment">Recaudación por tipo de pago</button>
+  <button mat-menu-item routerLink="/reportes/quantity-total-revenue-by-payment-date">Recaudación por pago y fecha</button>
+</mat-menu>
+
 
 <router-outlet></router-outlet>
