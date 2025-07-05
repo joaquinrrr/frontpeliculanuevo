@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table'
-import {MatCardModule} from '@angular/material/card';
-import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { CommonModule, NgIf } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -11,38 +11,54 @@ import { MatButtonModule } from '@angular/material/button';
 import { Cinema } from '../../../../models/Cinema';
 import { CinemaService } from '../../../../services/cinema.service';
 import { App } from '../../../../app';
+import { LoginService } from '../../../../services/login.service';
 
 @Component({
   selector: 'app-listarcinemas',
+  standalone: true,
   imports: [
-    MatTableModule, 
-    MatCardModule, 
-    CommonModule, 
-    MatPaginator, 
-    MatPaginatorModule, 
+    MatTableModule,
+    MatCardModule,
+    CommonModule,
+    MatPaginatorModule,
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    MatTableModule,
     MatFormFieldModule,
-    RouterLink,
+    RouterLink,NgIf
   ],
   templateUrl: './listarcinemas.html',
   styleUrl: './listarcinemas.css'
 })
-export class Listarcinemas {
-  displayedColumns: string[] = ['id', 'localname', 'urlimage', 'Cities']
-  dataSource: MatTableDataSource<Cinema>=new MatTableDataSource();
+export class Listarcinemas implements OnInit, AfterViewInit {
+  displayedColumns: string[] = ['id', 'localname', 'urlimage', 'Cities', 'acciones'];
+  dataSource: MatTableDataSource<Cinema> = new MatTableDataSource();
+  role: string = '';
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private sI:CinemaService, private aPP: App){}
+  constructor(
+    private sI: CinemaService,
+    private aPP: App,
+    private loginService: LoginService,
+    private router: Router
+  ) {}
+
   ngOnInit(): void {
-    this.sI.list().subscribe((data)=>{ //agrega los datos en el data source
+    // Obtener el rol
+    if (this.loginService.verificar()) {
+      this.role = this.loginService.showRole();
+      console.log('Rol actual:', this.role);
+    }
+
+    this.sI.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(this.sortGenders(data));
-    })
-    this.sI.getList().subscribe((data)=>{
-      this.dataSource=new MatTableDataSource(this.sortGenders(data))
-    })
+      this.dataSource.paginator = this.paginator;
+    });
+
+    this.sI.getList().subscribe((data) => {
+      this.dataSource = new MatTableDataSource(this.sortGenders(data));
+    });
   }
 
   ngAfterViewInit() {
@@ -50,22 +66,24 @@ export class Listarcinemas {
   }
 
   eliminar(id: number) {
-    this.sI.eliminar(id).subscribe((data) => {
-      this.sI.list().subscribe((data) => {
-        this.sI.setList(this.sortGenders(data));
-      });
+    this.sI.eliminar(id).subscribe(() => {
+      this.dataSource.data = this.dataSource.data.filter((c) => c.id !== id);
     });
+  }
+
+  editar(id: number) {
+    this.router.navigate(['cinemas/ediciones', id]);
   }
 
   sortGenders(cinema: Cinema[]): Cinema[] {
     return cinema.sort((a, b) => a.id - b.id);
   }
 
-  isADMIN(): boolean {
-    return this.aPP.isAdmin();
-  }
-  isCLIENT(): boolean {
-    return this.aPP.isCliente();
+  isAdmin(): boolean {
+    return this.role === 'ADMIN';
   }
 
+  isCliente(): boolean {
+    return this.role === 'CLIENTE';
+  }
 }

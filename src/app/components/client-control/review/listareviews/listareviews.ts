@@ -9,6 +9,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { ReviewService } from '../../../../services/review.service';
 import { App } from '../../../../app';
+import { LoginService } from '../../../../services/login.service';
+import { CommonModule, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-listareviews',
@@ -19,7 +21,9 @@ import { App } from '../../../../app';
     MatFormFieldModule,
     MatPaginatorModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    CommonModule, NgIf
+    
   ],
   templateUrl: './listareviews.html',
   styleUrl: './listareviews.css'
@@ -36,15 +40,21 @@ export class Listareviews implements OnInit, AfterViewInit {
     'acciones'
   ];
 
+  role: string = '';
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     private reviewService: ReviewService,
     private router: Router,
-    private app: App
+    private app: App,
+    private loginService: LoginService
   ) {}
 
   ngOnInit(): void {
+    if (this.loginService.verificar()) {
+      this.role = this.loginService.showRole();
+    }
     this.cargarDatos();
   }
 
@@ -71,11 +81,11 @@ export class Listareviews implements OnInit, AfterViewInit {
     this.router.navigate(['reviews/ediciones', id]);
   }
 
-  isADMIN(): boolean {
-    return this.app.isAdmin();
+  isAdmin(): boolean {
+    return this.role === 'ADMIN';
   }
 
-  isCLIENTE(): boolean {
-    return this.app.isCliente();
+  isCliente(): boolean {
+    return this.role === 'CLIENTE';
   }
 }

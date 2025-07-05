@@ -1,37 +1,49 @@
-<div class="container">
+<section class="viewdetail">
   <div class="title-container">
-    <h1>Lista de Cines y Salas</h1>
+    <h1 class="title">Relaciones Cine - Sala</h1>
   </div>
 
-  <div class="card-container">
-    <mat-card *ngFor="let element of dataSource.data">
-      <mat-card-header>
-        <mat-card-title>{{ element.cinema.localname }} - Sala {{ element.rooms.nameroom }}</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <p>Código: {{ element.id }}</p>
-        <p>Cine: {{ element.cinema.localname }}</p>
-        <p>Ciudad: {{ element.cinema.cities.namecity }}</p>
-        <p>Sala: {{ element.rooms.nameroom }}</p>
-        <div class="button-container-right">
-          <button
-            mat-raised-button
-            color="primary"
-            [routerLink]="['ediciones', element.id]"
-          >
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button
-            mat-raised-button
-            color="warn"
-            (click)="eliminar(element.id)"
-          >
-            <mat-icon>delete_sweep</mat-icon>
-          </button>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-  <mat-paginator [pageSizeOptions]="[2, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements"></mat-paginator>
-</div>
+      <!-- ID -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let cr">{{ cr.id }}</td>
+      </ng-container>
+
+      <!-- Cine -->
+      <ng-container matColumnDef="cine">
+        <th mat-header-cell *matHeaderCellDef>Cine</th>
+        <td mat-cell *matCellDef="let cr">{{ cr.cinema?.localname }}</td>
+      </ng-container>
+
+      <!-- Sala -->
+      <ng-container matColumnDef="sala">
+        <th mat-header-cell *matHeaderCellDef>Sala</th>
+        <td mat-cell *matCellDef="let cr">{{ cr.rooms?.name }}</td>
+      </ng-container>
+
+      <!-- Acciones -->
+      <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let cr">
+          <ng-container *ngIf="isAdmin()">
+            <button mat-icon-button color="primary" (click)="editar(cr.id)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="eliminar(cr.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </ng-container>
+        </td>
+      </ng-container>
+
+      <!-- Header & Rows -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Paginador"></mat-paginator>
+  </div>
+</section>

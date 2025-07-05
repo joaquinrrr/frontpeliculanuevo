@@ -6,6 +6,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { LoginService } from './services/login.service';
 import { NgIf } from '@angular/common';
+import { HasRoleDirective } from './directives/has-role';
+
 
 @Component({
   selector: 'app-root',
@@ -22,8 +24,8 @@ import { NgIf } from '@angular/common';
 export class App implements OnInit {
   protected title = 'frontpeliculanuevo';
 
-  ngOnInit(): void {}
-  
+ ngOnInit(): void {
+  }
   role: string = '';
   username: string = '';
   constructor(private loginService: LoginService, private router: Router) {}
@@ -31,11 +33,12 @@ export class App implements OnInit {
   eliminar(){
     sessionStorage.clear();
     console.log("se cerró sesión con éxito!!")
+    this.router.navigate(['/landinghome']);
   }
 
   verificar() {
     this.role = this.loginService.showRole();
-    this.username = this.loginService.showUsername();
+      this.username = this.loginService.showUsername();
     return this.loginService.verificar();
   }
   isAdmin() {

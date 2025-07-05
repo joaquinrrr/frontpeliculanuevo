@@ -1,6 +1,6 @@
-import { TypePayments } from '../../../../models/TypePayments';
+import { Cities } from '../../../../models/Cities';
 import { MatButtonModule } from '@angular/material/button';
-import { AfterViewInit, ApplicationModule, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -9,45 +9,57 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { App } from '../../../../app';
 import { CitiesService } from '../../../../services/cities.service';
-import { Cities } from '../../../../models/Cities';
+import { LoginService } from '../../../../services/login.service';
+import { CommonModule, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-listarcities',
+  standalone: true,
   imports: [
     MatButtonModule,
     MatTableModule,
     MatFormFieldModule,
     MatPaginatorModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    RouterLink,
+    CommonModule,NgIf
   ],
   templateUrl: './listarcities.html',
   styleUrl: './listarcities.css'
 })
 export class Listarcities implements OnInit, AfterViewInit {
-dataSource: MatTableDataSource<Cities> = new MatTableDataSource();
-  displayedColumns: string[] = [
-    
-    'id',
-    'namecity',
-    'acciones'
-  ]
+  role: string = '';
+  dataSource: MatTableDataSource<Cities> = new MatTableDataSource();
+  displayedColumns: string[] = ['id', 'namecity', 'acciones'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  ngAfterViewInit(): void {}
 
-  constructor(private sS: CitiesService, private router: Router, private aPP:App) {}
+  constructor(
+    private sS: CitiesService,
+    private router: Router,
+    private aPP: App,
+    private loginService: LoginService
+  ) {}
 
   ngOnInit(): void {
+    if (this.loginService.verificar()) {
+      this.role = this.loginService.showRole();
+    }
+
     this.sS.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator;
     });
-    this.sS.getList().subscribe((data)=>{
-      this.dataSource=new MatTableDataSource(data)
-    })
-  }
-  isObject(value: any): boolean { return typeof value === 'object'; }
 
+    this.sS.getList().subscribe((data) => {
+      this.dataSource.data = data;
+    });
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+  }
 
   delete(id: number): void {
     this.sS.eliminar(id).subscribe(() => {
@@ -56,15 +68,14 @@ dataSource: MatTableDataSource<Cities> = new MatTableDataSource();
   }
 
   editar(id: number): void {
-    this.router.navigate(['cities/ediciones', id]);  
+    this.router.navigate(['cities/ediciones', id]);
   }
 
-  isADMIN(): boolean {
-    return this.aPP.isAdmin();
+  isAdmin(): boolean {
+    return this.role === 'ADMIN';
   }
-  isCLIENTE(): boolean {
-    return this.aPP.isCliente();
-  }
-  
 
+  isCliente(): boolean {
+    return this.role === 'CLIENTE';
+  }
 }

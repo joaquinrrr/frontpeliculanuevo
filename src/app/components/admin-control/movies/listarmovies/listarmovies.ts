@@ -9,6 +9,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { App } from '../../../../app';
 import { Router, RouterModule } from '@angular/router';
+import { LoginService } from '../../../../services/login.service';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-listarmovies',
@@ -18,32 +20,43 @@ import { Router, RouterModule } from '@angular/router';
     MatPaginatorModule,
     MatInputModule,
     MatIconModule,
-    RouterModule],
+    RouterModule,
+    NgIf],
   templateUrl: './listarmovies.html',
   styleUrl: './listarmovies.css'
 })
 export class Listarmovies implements OnInit, AfterViewInit {
-  dataSource: MatTableDataSource <Movies> = new MatTableDataSource();
-displayedColumns: string[] = [
-  'id', 'namemovie', 'yearmovie', 'typemovie',
-  'yearold', 'director', 'urlimage', 'acciones' // ← esto debe estar incluido
-];
+  role: string = "";
+  dataSource: MatTableDataSource<Movies> = new MatTableDataSource();
+
+  displayedColumns: string[] = [
+    'id', 'namemovie', 'yearmovie', 'typemovie',
+    'yearold', 'director', 'urlimage', 'acciones'
+  ];
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     private mov: MoviesService,
     private aPP: App,
-    private router: Router  // ← solución aquí
+    private router: Router,
+    private loginService: LoginService
   ) {}
 
   ngOnInit(): void {
-    // Carga inicial de productos
+    // Obtener rol al iniciar
+    if (this.loginService.verificar()) {
+      this.role = this.loginService.showRole();
+      console.log('Rol actual:', this.role); // Puedes quitarlo luego de verificar
+    }
+
+    // Carga inicial
     this.mov.list().subscribe((data) => {
       this.dataSource.data = data;
       this.dataSource.paginator = this.paginator;
     });
 
-    // Actualización reactiva de la lista de productos
+    // Actualización reactiva
     this.mov.getList().subscribe((data) => {
       this.dataSource.data = data;
     });
@@ -55,7 +68,7 @@ displayedColumns: string[] = [
 
   delete(id: number): void {
     this.mov.eliminar(id).subscribe(() => {
-      this.dataSource.data = this.dataSource.data.filter((product) => product.id !== id);
+      this.dataSource.data = this.dataSource.data.filter((movie) => movie.id !== id);
     });
   }
 
@@ -63,11 +76,11 @@ displayedColumns: string[] = [
     this.router.navigate(['movies/ediciones', id]);  
   }
 
-  isADMIN(): boolean {
-    return this.aPP.isAdmin();
+  isAdmin(): boolean {
+    return this.role === 'ADMIN';
   }
-  isCLIENTE(): boolean {
-    return this.aPP.isCliente();
+
+  isCliente(): boolean {
+    return this.role === 'CLIENTE';
   }
-  
 }

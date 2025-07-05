@@ -12,6 +12,7 @@ import { LoginService } from '../../../../services/login.service';
 import { Function } from '../../../../models/Functions';
 import { Users } from '../../../../models/Users';
 import { App } from '../../../../app';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-listarfunciones',
@@ -22,26 +23,19 @@ import { App } from '../../../../app';
     MatFormFieldModule,
     MatPaginatorModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule, NgIf
   ],
   templateUrl: './listarfunciones.html',
   styleUrls: ['./listarfunciones.css']
 })
 export class Listarfunciones implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<Function> = new MatTableDataSource();
-  displayedColumns: string[] = [
-    'id',
-    'totalchair',
-    'pelicula',
-    'cine',
-    'sala',
-    'usuario',
-    'acciones'
-  ];
+  displayedColumns: string[] = ['id', 'totalchair', 'pelicula', 'cine', 'sala', 'usuario', 'acciones'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  currentUser: Users = new Users();
-  username: string = '';  // Variable para almacenar el nombre de usuario
+
+  username: string = '';
+  role: string = '';
 
   constructor(
     private functionService: FunctionService,
@@ -51,15 +45,17 @@ export class Listarfunciones implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    // Obtener el nombre de usuario desde el servicio LoginService
-    this.username = this.loginService.showUsername();
+    if (this.loginService.verificar()) {
+      this.username = this.loginService.showUsername();
+      this.role = this.loginService.showRole();
+    }
 
-    // Llamamos al servicio para obtener todas las funciones
     this.functionService.list().subscribe((data) => {
-      // Filtramos las funciones para mostrar solo las que pertenecen al usuario autenticado
-      const filteredFunctions = data.filter((func) => func.user_id.username === this.username);
-      // Asignamos las funciones filtradas al DataSource
-      this.dataSource = new MatTableDataSource(filteredFunctions);
+      const filteredData = this.isAdmin()
+        ? data
+        : data.filter(f => f.user_id?.username === this.username);
+
+      this.dataSource = new MatTableDataSource(filteredData);
       this.dataSource.paginator = this.paginator;
     });
   }
@@ -78,11 +74,11 @@ export class Listarfunciones implements OnInit, AfterViewInit {
     this.router.navigate(['funcionescine/ediciones', id]);
   }
 
-  isADMIN(): boolean {
-    return this.app.isAdmin();
+  isAdmin(): boolean {
+    return this.role === 'ADMIN';
   }
 
-  isCLIENTE(): boolean {
-    return this.app.isCliente();
+  isCliente(): boolean {
+    return this.role === 'CLIENTE';
   }
 }

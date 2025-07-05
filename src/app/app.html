@@ -35,7 +35,7 @@
   <button mat-menu-item [matMenuTriggerFor]="menuTickets" class="custom-button">
     <mat-icon>schedule</mat-icon><span class="button-text">Tickets</span>
   </button>
-  <button mat-menu-item [matMenuTriggerFor]="menuTipoPago" class="custom-button">
+  <button mat-menu-item [matMenuTriggerFor]="menuTipoPago" class="custom-button" *ngIf="isAdmin()">
     <mat-icon>meeting_room</mat-icon><span class="button-text">Tipos de pago</span>
   </button>
   <button mat-menu-item [matMenuTriggerFor]="menuUsers" class="custom-button" *ngIf="isAdmin()">
@@ -47,7 +47,7 @@
 </mat-toolbar>
 
 <mat-menu #menuCines="matMenu">
-  <button mat-menu-item routerLink="/cinema">
+  <button mat-menu-item routerLink="/cinema"  >
     <mat-icon>list</mat-icon>Listar
   </button>
   <button mat-menu-item routerLink="/cinema/registercinema" *ngIf="isAdmin()">
@@ -56,7 +56,7 @@
 </mat-menu>
 
 <mat-menu #menuCinesRooms="matMenu">
-  <button mat-menu-item routerLink="/cinemarooms">
+  <button mat-menu-item routerLink="/cinemarooms"  >
     <mat-icon>list</mat-icon>Listar
   </button>
   <button mat-menu-item routerLink="/cinemarooms/registrarcinemarooms" *ngIf="isAdmin()">
@@ -140,7 +140,7 @@
   <button mat-menu-item routerLink="/typepayment">
     <mat-icon>list</mat-icon>Listar
   </button>
-  <button mat-menu-item routerLink="/typepayment/registrartype" *ngIf="isAdmin()">
+  <button mat-menu-item routerLink="/typepayment/registrartype" >
     <mat-icon>add</mat-icon>Insertar Registro de Type
   </button>
 </mat-menu>
@@ -164,15 +164,15 @@
 
 <mat-menu #menuReport="matMenu">
   <button mat-menu-item routerLink="/reportes/find-movie-schedule">Buscar funciones por cine</button>
-  <button mat-menu-item routerLink="/reportes/find-tickets-username">Buscar tickets por usuario</button>
+  <button mat-menu-item routerLink="/reportes/find-tickets-username" *ngIf="isAdmin()">Buscar tickets por usuario</button>
   <button mat-menu-item routerLink="/reportes/get-movie-review">Reseñas de película</button>
-  <button mat-menu-item routerLink="/reportes/quantity-functions-cinema">Cantidad funciones por cine</button>
-  <button mat-menu-item routerLink="/reportes/quantity-functions-user-date">Funciones por usuario y fecha</button>
-  <button mat-menu-item routerLink="/reportes/quantity-functions-users">Cantidad funciones por usuario</button>
-  <button mat-menu-item routerLink="/reportes/quantity-movies-city">Películas proyectadas por ciudad</button>
-  <button mat-menu-item routerLink="/reportes/quantity-tickets-cinema">Tickets vendidos por cine</button>
-  <button mat-menu-item routerLink="/reportes/quantity-total-revenue-by-payment">Recaudación por tipo de pago</button>
-  <button mat-menu-item routerLink="/reportes/quantity-total-revenue-by-payment-date">Recaudación por pago y fecha</button>
+  <button mat-menu-item routerLink="/reportes/quantity-functions-cinema" *ngIf="isAdmin()">Cantidad funciones por cine</button>
+  <button mat-menu-item routerLink="/reportes/quantity-functions-user-date"*ngIf="isAdmin()" >Funciones por usuario y fecha</button>
+  <button mat-menu-item routerLink="/reportes/quantity-functions-users" *ngIf="isAdmin()">Cantidad funciones por usuario</button>
+  <button mat-menu-item routerLink="/reportes/quantity-movies-city" *ngIf="isAdmin()">Películas proyectadas por ciudad</button>
+  <button mat-menu-item routerLink="/reportes/quantity-tickets-cinema" *ngIf="isAdmin()">Tickets vendidos por cine</button>
+  <button mat-menu-item routerLink="/reportes/quantity-total-revenue-by-payment" *ngIf="isAdmin()">Recaudación por tipo de pago</button>
+  <button mat-menu-item routerLink="/reportes/quantity-total-revenue-by-payment-date" *ngIf="isAdmin()">Recaudación por pago y fecha</button>
 </mat-menu>
 
 
